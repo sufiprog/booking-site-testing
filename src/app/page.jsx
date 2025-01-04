@@ -36,12 +36,12 @@ const page = () => {
             className="h-12 w-auto"
           />
           <div className="flex gap-4">
-            <Button variant="outline" className="bg-white">
+            <Link  href={"/auth/login"} className="bg-white border border-gray-500 rounded-md px-4 py-2 font-medium">
               LOGIN
-            </Button>
-            <Button className="bg-[#B8860B] hover:bg-[#986F0B] text-white">
+            </Link>
+            <Link href={"/auth/signup"} className="bg-[#B8860B] hover:bg-[#986F0B] text-white rounded-md px-4 py-2 font-medium">
               REGISTER
-            </Button>
+            </Link>
           </div>
         </div>
       </header>
