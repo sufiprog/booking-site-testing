@@ -1,6 +1,8 @@
 import User from "@/models/user.model";
 import { NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { verificationEmail } from "@/helpers/emailService";
 
 const { connectDB } = require("@/db/db.config");
 
@@ -9,7 +11,7 @@ connectDB();
 export async function POST(request) {
   try {
     const reqBody = await request.json();
-    const { fullName, whatsappNumber, email, password} = reqBody;
+    const { fullName, whatsappNumber, email, password } = reqBody;
 
     const user = await User.findOne({ email, whatsappNumber });
 
@@ -34,6 +36,16 @@ export async function POST(request) {
     });
 
     const savedUser = await newUser.save();
+
+    //Generating email verification token
+    const verificationToken = jwt.sign(
+      { userId: savedUser._id },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    //Sending email to user
+    await verificationEmail(email, verificationToken);
 
     return NextResponse.json(
       { message: "User created successfully", success: true, savedUser },

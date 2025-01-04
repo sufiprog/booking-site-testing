@@ -48,17 +48,20 @@ export async function POST(request) {
       expiresIn: "1d",
     });
 
-    return NextResponse.json(
+    const response = NextResponse.json(
       {
         message: "Login successful",
         success: true,
         token,
       },
-      200
+      { status: 200 }
     );
+
+    response.cookies.set("token", token, { httpOnly: true });
+    return response;
   } catch (error) {
     console.error("Error in login:", error);
-    NextResponse.json(
+    return NextResponse.json(
       { message: "error in login", success: false },
       { status: 500 }
     );

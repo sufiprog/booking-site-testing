@@ -25,44 +25,47 @@ const userSchema = new mongoose.Schema(
     },
     whatsappNumber: {
       type: Number,
+      unique: true,
       required: [true, "Whatsapp number required"],
     },
     package: {
       type: String,
       default: "none",
     },
+    committeeId:{
+      type: Number,
+      
+    },
     familyMembers: [
       {
-        familyuserFullName: {
+        familyUserFullName: {
           type: String,
           required: true,
-        }, // Family member's full name
-        familyuserEmail: {
+        },
+        familyUserEmail: {
           type: String,
-          required: true,
-          unique: true,
-          lowercase: true,
-          trim: true,
-        }, // Family member's email
-        familywhatsAppNo: {
+          unique: true,  
+          default: "", 
+        },
+        familyUserwhatsAppNo: {
           type: Number,
           required: true,
-        }, // Family member's WhatsApp number
-        familyuserPhoneNo: {
+        },
+        familyUserPhoneNo: {
           type: Number,
           required: true,
           trim: true,
-        }, // Family member's phone number
-        familyrelation: {
+        },
+        familyUserrelation: {
           type: String,
           required: true,
-        }, // Relation to the user
-        familyuserPassword: {
+        },
+        familyUserPassword: {
           type: String,
           required: true,
         },
       },
-    ],
+    ] ,
   },
   { timestamps: true }
 );
