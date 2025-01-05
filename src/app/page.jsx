@@ -1,9 +1,15 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
-const page = () => {
+const Page = () => {
+
   return (
     <div className="min-h-screen bg-[#004D4D]">
       {/* Top Bar */}
@@ -13,7 +19,7 @@ const page = () => {
           <span className="text-sm">EN</span>
           <div className="flex items-center gap-2">
             <Link href="#" className="text-white hover:text-gray-200">
-              <FaFacebookF  className="h-4 w-4" />
+              <FaFacebookF className="h-4 w-4" />
             </Link>
             <Link href="#" className="text-white hover:text-gray-200">
               <FaInstagram className="h-4 w-4" />
@@ -36,12 +42,25 @@ const page = () => {
             className="h-12 w-auto"
           />
           <div className="flex gap-4">
-            <Link  href={"/auth/login"} className="bg-white border border-gray-500 rounded-md px-4 py-2 font-medium">
-              LOGIN
-            </Link>
-            <Link href={"/auth/signup"} className="bg-[#B8860B] hover:bg-[#986F0B] text-white rounded-md px-4 py-2 font-medium">
-              REGISTER
-            </Link>
+            {token ? (
+              // If token exists, display the logged-in state
+              <span className="text-white">Logged in</span>
+            ) : (
+              <>
+                <Link
+                  href="/auth/login"
+                  className="bg-white border border-gray-500 rounded-md px-4 py-2 font-medium"
+                >
+                  LOGIN
+                </Link>
+                <Link
+                  href="/auth/signup"
+                  className="bg-[#B8860B] hover:bg-[#986F0B] text-white rounded-md px-4 py-2 font-medium"
+                >
+                  REGISTER
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </header>
@@ -120,4 +139,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

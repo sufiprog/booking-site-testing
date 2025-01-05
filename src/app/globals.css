@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+button:disabled {
+  cursor: not-allowed;
+}
 
 @layer base {
   :root {

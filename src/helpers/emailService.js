@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 
 export const verificationEmail = async (email, verificationToken) => {
-  const verifyUrl = `${process.env.DOMAIN}/api/users/verify-email?token=${verificationToken}`;
+  const verifyUrl = `${process.env.DOMAIN}/verify-email?token=${verificationToken}`;
 
   const transporter = nodemailer.createTransport({
     host: "sandbox.smtp.mailtrap.io",
